@@ -190,6 +190,9 @@ def test_repo_search_by_min_views_and_downloads_strict(repo, populated_db):
     results = repo.filter(min_views=10)
     assert len(results) == 0, f"Expected 0 results for min_views=10, got {len(results)}"
 
+    results = repo.filter(max_downloads=0)
+    assert len(results) == 0, f"Expected 0 results for max_downloads=0, got {len(results)}"
+
 
 def test_explore_route_post_returns_json_strict(test_client, populated_db):
     # POST a /explore con author=Alice -> esperar lista con exactamente Dataset One

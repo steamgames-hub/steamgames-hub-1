@@ -33,7 +33,7 @@ jobs:
     services:
       # MariaDB service container for integration tests
       mariadb:
-        image: mariadb:11.4
+        image: mariadb:10.6
         env:
           MARIADB_ROOT_PASSWORD: ${{ env.MARIADB_ROOT_PASSWORD }}
           MARIADB_DATABASE: ${{ env.MARIADB_DATABASE }}

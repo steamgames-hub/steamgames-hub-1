@@ -514,7 +514,7 @@ Para evitar problemas de compatibilidad, se recomienda Docker como entorno princ
 
 ### 2. Descripción del cambio
 
-**Cambio solicitado:** Modificar el filtro de búsqueda avanzada para cambiar el criterio de **descargas mínimas** (`min_downloads`) por **descargas máximas** (`max_downloads`).
+**Cambio solicitado:** Modificar el filtro de búsqueda avanzada para cambiar el criterio de **descargas mínimas** (`max_downloads`) por **descargas máximas** (`max_downloads`).
 
 **Justificación:** Adaptar la funcionalidad de filtrado para permitir a los usuarios buscar datasets que no superen un número máximo de descargas.
 
@@ -523,7 +523,7 @@ Para evitar problemas de compatibilidad, se recomienda Docker como entorno princ
 ### 3. Cambios específicos
 
 #### Funcionalidad
-- Cambiar nombres de variables min_downloads a max_downloads, y la descripcion del filtro en el HTML. Cambiar ademas el signo de la logica de la busqueda.
+- Cambiar nombres de variables max_downloads a max_downloads, y la descripcion del filtro en el HTML. Cambiar ademas el signo de la logica de la busqueda.
 
 #### Test unitario (nuevo)
 - Añadir test que verifique que al establecer `max_downloads` con un valor determinado, no aparecen datasets que superen ese límite
@@ -545,9 +545,9 @@ Para evitar problemas de compatibilidad, se recomienda Docker como entorno princ
 
 ### 5. Criterios de aceptación
 
-- Todas las referencias a `min_downloads` han sido reemplazadas por `max_downloads`
+- Todas las referencias a `max_downloads` han sido reemplazadas por `max_downloads`
 - El operador de comparación ha sido cambiado de `>=` a `<=`
-- El label del formulario muestra "Max downloads" en lugar de "Min downloads"
+- El label del formulario muestra "Max downloads" en lugar de "Max downloads"
 - El test unitario verifica que no aparecen datasets con descargas superiores al máximo
 - Todos los tests existentes siguen pasando
 - La funcionalidad opera correctamente en producción
@@ -557,7 +557,7 @@ Para evitar problemas de compatibilidad, se recomienda Docker como entorno princ
 ## 8. Plantilla de Issue sugerida
 
 ### Título
-Cambiar filtro de búsqueda: min_downloads → max_downloads
+Cambiar filtro de búsqueda: max_downloads → max_downloads
 
 ### Descripción
 Modificar el filtro de búsqueda avanzada para reemplazar el criterio de descargas mínimas por descargas máximas.

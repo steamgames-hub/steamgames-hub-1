@@ -143,7 +143,7 @@ def test_repo_search_by_date_range(repo, populated_db):
 
 
 def test_repo_search_by_min_views_and_downloads(repo, populated_db):
-    results = repo.filter(min_views=3, min_downloads=2)
+    results = repo.filter(min_views=3, max_downloads=2)
     titles = [r.ds_meta_data.title for r in results]
     assert "Dataset One" in titles
 
@@ -183,12 +183,15 @@ def test_repo_search_by_date_range_strict(repo, populated_db):
 
 
 def test_repo_search_by_min_views_and_downloads_strict(repo, populated_db):
-    results = repo.filter(min_views=3, min_downloads=2)
+    results = repo.filter(min_views=3, max_downloads=2)
     titles = sorted([r.ds_meta_data.title for r in results])
-    assert titles == ["Dataset One"], f"Expected only ['Dataset One'] for min_views=3,min_downloads=2, got: {titles}"
+    assert titles == ["Dataset One"], f"Expected only ['Dataset One'] for min_views=3,max_downloads=2, got: {titles}"
 
     results = repo.filter(min_views=10)
     assert len(results) == 0, f"Expected 0 results for min_views=10, got {len(results)}"
+
+    results = repo.filter(max_downloads=0)
+    assert len(results) == 0, f"Expected 0 results for max_downloads=0, got {len(results)}"
 
 
 def test_explore_route_post_returns_json_strict(test_client, populated_db):

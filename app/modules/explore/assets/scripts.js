@@ -26,7 +26,7 @@ function updateURL(params) {
     const managed = [
         "query","sorting", "data_category",
         "author","tags","community",
-        "date_from","date_to","min_downloads","min_views"
+        "date_from","date_to","max_downloads","min_views"
     ];
     managed.forEach(k => p.delete(k));
 
@@ -78,7 +78,7 @@ function hydrateFromURL() {
     }
 
     // descargas y vistas mínimas
-    if (p.get("min_downloads") && get('min_downloads')) get('min_downloads').value = p.get("min_downloads");
+    if (p.get("max_downloads") && get('max_downloads')) get('max_downloads').value = p.get("max_downloads");
     if (p.get("min_views") && get('min_views')) get('min_views').value = p.get("min_views");
 }
 
@@ -98,7 +98,7 @@ function collectSearchCriteria() {
     const filenames = get('filenames')?.value?.trim() || "";
     const date_from = buildDateFromParts("date_from");
     const date_to = buildDateFromParts("date_to");
-    const min_downloads = get('min_downloads')?.value?.trim();
+    const max_downloads = get('max_downloads')?.value?.trim();
     const min_views = get('min_views')?.value?.trim();
 
     const searchCriteria = {
@@ -115,8 +115,8 @@ function collectSearchCriteria() {
     if (community) searchCriteria.community = community;
     if (date_from) searchCriteria.date_from = date_from;
     if (date_to) searchCriteria.date_to = date_to;
-    if (min_downloads !== "" && !Number.isNaN(Number(min_downloads))) {
-        searchCriteria.min_downloads = Number(min_downloads);
+    if (max_downloads !== "" && !Number.isNaN(Number(max_downloads))) {
+        searchCriteria.max_downloads = Number(max_downloads);
     }
     if (min_views !== "" && !Number.isNaN(Number(min_views))) {
         searchCriteria.min_views = Number(min_views);
@@ -126,7 +126,7 @@ function collectSearchCriteria() {
     updateURL({
         query, data_category, sorting,
         author, tags, filenames, community, date_from, date_to,
-        min_downloads: searchCriteria.min_downloads,
+        max_downloads: searchCriteria.max_downloads,
         min_views: searchCriteria.min_views
     });
 
@@ -290,7 +290,7 @@ function clearFilters() {
     });
 
     // Reset avanzados
-    ['author','tags', 'filenames','community','min_downloads','min_views',
+    ['author','tags', 'filenames','community','max_downloads','min_views',
      'date_from_day','date_from_month','date_from_year',
      'date_to_day','date_to_month','date_to_year'
     ].forEach(id => { if (get(id)) get(id).value = ""; });

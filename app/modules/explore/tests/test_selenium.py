@@ -51,7 +51,7 @@ def test_explore_page_filters():
         driver.find_element(By.ID, "date_to_year").send_keys("2024")
 
         # --- 6. Rellenar filtros numéricos ---
-        driver.find_element(By.ID, "min_downloads").send_keys("10")
+        driver.find_element(By.ID, "max_downloads").send_keys("10")
         driver.find_element(By.ID, "min_views").send_keys("100")
 
         # --- 7. Esperar resultados y validar existencia de contador ---

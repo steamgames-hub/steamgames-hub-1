@@ -26,7 +26,7 @@ class ExploreBehavior(TaskSet):
             "query": "",
             "author": fake.name(),
             "tags": ",".join(fake.words(nb=2)),
-            "min_downloads": fake.random_int(0, 10),
+            "max_downloads": fake.random_int(0, 10),
             "min_views": fake.random_int(0, 100),
             "csrf_token": csrf,
         }

@@ -25,7 +25,7 @@ class ExploreRepository(BaseRepository):
         community=None,
         date_from=None,
         date_to=None,
-        min_downloads=None,
+        max_downloads=None,
         min_views=None,
         limit=50,
         offset=0,
@@ -126,7 +126,7 @@ class ExploreRepository(BaseRepository):
             q = q.filter(DataSet.created_at <= date_to)
 
         # downloads/views aggregates
-        if min_downloads is not None:
+        if max_downloads is not None:
             dl_sub = (
                 db.session.query(
                     DSDownloadRecord.dataset_id.label("dsid"), func.count(DSDownloadRecord.id).label("dlc")
@@ -134,7 +134,8 @@ class ExploreRepository(BaseRepository):
                 .group_by(DSDownloadRecord.dataset_id)
                 .subquery()
             )
-            q = q.outerjoin(dl_sub, dl_sub.c.dsid == DataSet.id).filter(dl_sub.c.dlc >= int(min_downloads))
+            q = q.outerjoin(dl_sub, dl_sub.c.dsid == DataSet.id).filter(func.coalesce(dl_sub.c.dlc,
+                                                                                      0) <= int(max_downloads))
 
         if min_views is not None:
             v_sub = (

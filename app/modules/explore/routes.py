@@ -65,7 +65,7 @@ def index():
             community=payload.get("community"),
             date_from=parse_date(payload.get("date_from")),
             date_to=parse_date(payload.get("date_to")),
-            min_downloads=payload.get("min_downloads"),
+            max_downloads=payload.get("max_downloads"),
             min_views=payload.get("min_views"),
         )
 
